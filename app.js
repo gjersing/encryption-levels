@@ -144,7 +144,6 @@ app.post('/login', (req, res) => {
 app.post('/submit', (req, res) => {
   const secret = req.body.secret;
 
-  console.log(req.user.id);
   User.findById(req.user.id, function(err, foundUser) {
     if (err) {
       console.log(err);
@@ -159,6 +158,11 @@ app.post('/submit', (req, res) => {
   })
 });
 
-app.listen(3000, function() {
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+app.listen(port, function() {
   console.log("Server started successfully");
 });
